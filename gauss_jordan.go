@@ -13,7 +13,7 @@ func NonZeroEntry(arr []*Int) (int, *Int, error) {
 	value := arr[0]
 	index := -1
 	for i, a := range arr {
-		if a.Cmp(NewInt(0)) != 0 {
+		if a.Cmp(NewInt(0, a.Base)) != 0 {
 			value = a
 			index = i
 			break
@@ -108,7 +108,7 @@ func GaussJordan(linearSystem [][]*Int, linearSystemResult []*Int) ([]*Int, erro
 			for i := index_current_row + 1; i < nrows; i++ {
 				factor := new(Int).Mul(extendedMatrix[i][index_current_column], ModInverse(extendedMatrix[index_current_row][index_current_column]))
 				/* Fill with zeros the lower part of pivot column: */
-				extendedMatrix[i][index_current_column] = NewInt(0)
+				extendedMatrix[i][index_current_column] = NewInt(0, current_column[0].Base)
 				/* Do for all remaining elements in current row: */
 				for j := index_current_column + 1; j < ncols; j++ {
 					num := new(Int).Mul(extendedMatrix[index_current_row][j], factor)
@@ -129,7 +129,7 @@ func GaussJordan(linearSystem [][]*Int, linearSystemResult []*Int) ([]*Int, erro
 	}
 	for i := 0; i < nrows; i++ {
 		for j := 0; j < ncols; j++ {
-			if extendedMatrix[i][j].Cmp(NewInt(0)) != 0 {
+			if extendedMatrix[i][j].Cmp(NewInt(0, extendedMatrix[i][j].Base)) != 0 {
 				pivots[i] = j
 				break
 			}
@@ -143,7 +143,7 @@ func GaussJordan(linearSystem [][]*Int, linearSystemResult []*Int) ([]*Int, erro
 
 	result := make([]*Int, ncols-1)
 	for j := 0; j < ncols-1; j++ {
-		result[j] = NewInt(0)
+		result[j] = NewInt(0, extendedMatrix[0][0].Base)
 	}
 
 	// Calculate result in position pivots[i]
