@@ -12,8 +12,8 @@ type Matrix struct {
 
 // NewMatrix creates a new (unexported) matrix struct.
 func NewMatrix(r, c int, vals []*Int) *Matrix {
-	space := r*c-len(vals)
-	for i:=0; i<space; i++ {
+	space := r*c - len(vals)
+	for i := 0; i < space; i++ {
 		vals = append(vals, nil)
 	}
 	return &Matrix{
@@ -134,7 +134,7 @@ func GetI(c int, context *Int) *Matrix {
 	I := NewMatrix(c, c, []*Int{})
 	i := 0
 	idex := 0
-	for q:=0; q<len(I.values); q++{
+	for q := 0; q < len(I.values); q++ {
 		I.values[q] = NewInt(0, context.Base)
 	}
 	for i < c {

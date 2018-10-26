@@ -43,7 +43,7 @@ func (n *Int) Sub(x, y *Int) *Int {
 }
 
 // LinearCombination is the dot product of two vectors in a finite field. Vectors should have the same dimensionality for proper behavior
-func (n *Int) LinearCombination(vec1 , vec2 []*Int) *Int {
+func (n *Int) LinearCombination(vec1, vec2 []*Int) *Int {
 	v := big.NewInt(0)
 	n.Base = vec1[0].Base
 	for i := range vec1 {
@@ -68,7 +68,7 @@ func ModInverse(number *Int) *Int {
 	result.Mod(result, number.Base)
 	return &Int{
 		Value: result,
-		Base: number.Base,
+		Base:  number.Base,
 	}
 }
 
@@ -104,9 +104,9 @@ func NewInt(i int64, prime *big.Int) *Int {
 	if prime == nil {
 		prime = defaultP
 	}
-	return &Int {
+	return &Int{
 		Value: num.Mod(num, prime),
-		Base: prime,
+		Base:  prime,
 	}
 }
 
@@ -116,9 +116,9 @@ func IntFromBytes(b []byte, prime *big.Int) *Int {
 	if prime == nil {
 		prime = defaultP
 	}
-	return &Int {
+	return &Int{
 		Value: num.Mod(num, prime),
-		Base: prime,
+		Base:  prime,
 	}
 }
 
@@ -127,9 +127,9 @@ func IntFromBig(num *big.Int, prime *big.Int) *Int {
 	if prime == nil {
 		prime = defaultP
 	}
-	return &Int {
+	return &Int{
 		Value: new(big.Int).Mod(num, prime),
-		Base: prime,
+		Base:  prime,
 	}
 }
 
@@ -142,9 +142,9 @@ func IntFromString(str string, Base int, prime *big.Int) (*Int, error) {
 	if prime == nil {
 		prime = defaultP
 	}
-	return &Int {
+	return &Int{
 		Value: new(big.Int).Mod(num, prime),
-		Base: prime,
+		Base:  prime,
 	}, nil
 }
 
@@ -160,6 +160,6 @@ func RandInt(prime *big.Int) (*Int, error) {
 	}
 	return &Int{
 		Value: result,
-		Base: prime,
+		Base:  prime,
 	}, nil
 }
